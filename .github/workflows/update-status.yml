@@ -1,0 +1,30 @@
+name: Update ARK Online Counter
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  update-status:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Update Discord channel
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+          ARKSTATUS_API_KEY: ${{ secrets.ARKSTATUS_API_KEY }}
+          ARKSTATUS_SERVER_ID: ${{ secrets.ARKSTATUS_SERVER_ID }}
+        run: python update_status.py

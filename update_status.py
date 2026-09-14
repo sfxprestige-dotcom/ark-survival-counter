@@ -25,9 +25,9 @@ server = payload["data"]
 
 if server.get("status") == "online":
     player_count = int(server.get("players", 0))
-    new_name = f":green_circle: Online Now: {player_count}"
+    new_name = f"\U0001F7E2 Online Now: {player_count}"
 else:
-    new_name = ":red_circle: ARK Offline"
+    new_name = "\U0001F534 ARK Offline"
 
 # ---- Check current Discord channel name ----
 discord_url = f"https://discord.com/api/v10/channels/{CHANNEL_ID}"
